@@ -16,7 +16,7 @@ const TaskList = () => {
           onEdit={() => alert("Edit Task")}
           onDelete={() => alert("Delete Task")}
         />
-         <TaskCard
+        <TaskCard
           title="Complete React Assignment"
           message="Build a responsive task management dashboard using React and Tailwind CSS."
           date="22 Jul 2026"
@@ -26,7 +26,7 @@ const TaskList = () => {
           onDelete={() => alert("Delete Task")}
         />
 
-         <TaskCard
+        <TaskCard
           title="Complete React Assignment"
           message="Build a responsive task management dashboard using React and Tailwind CSS."
           date="22 Jul 2026"
@@ -35,7 +35,6 @@ const TaskList = () => {
           onEdit={() => alert("Edit Task")}
           onDelete={() => alert("Delete Task")}
         />
-        
       </main>
     </div>
   );

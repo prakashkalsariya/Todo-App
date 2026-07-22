@@ -4,16 +4,21 @@
 // import heroImg from './assets/hero.png'
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import List from "./components/TaskList";
 import TaskList from "./components/TaskList";
+import AddTask from "./components/AddTask";
+import { clientRoutes } from "./utils/routes.ts";
+import EditTask from "./components/EditTask.tsx";
 
 function App() {
   // const [count, setCount] = useState(0)
 
   return (
     <>
+    
       <Routes>
-        <Route path="/" element={<TaskList />} />
+        <Route path={clientRoutes.taskList} element={<TaskList />} />
+        <Route path={clientRoutes.addTask} element={<AddTask />} />
+          <Route path={clientRoutes.editTask} element={<EditTask />} />
       </Routes>
     </>
   );
