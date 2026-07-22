@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Ellipsis, LoaderCircle, TriangleAlert } from "lucide-react";
 
-const TaskDeleteModal = ({ isOpen = true, onClose, onConfirm }: any) => {
+const TaskDeleteModal = ({ isOpen, onClose, onConfirm }: any) => {
   if (!isOpen) return null;
   const [clickDelete, setClickDelete] = useState(false);
 
