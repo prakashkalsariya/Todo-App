@@ -23,7 +23,7 @@ const TaskCard = ({
   const navigate = useNavigate();
   return (
     <>
-    {/* <TaskDeleteModal/> */}
+    <TaskDeleteModal/>
 
     <div className="max-w-md w-full bg-white rounded-2xl shadow-lg border border-gray-200 p-6 hover:shadow-xl transition duration-300">
       {/* Title */}
