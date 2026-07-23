@@ -9,57 +9,47 @@ import {
 } from "lucide-react";
 import { clientRoutes } from "../utils/routes";
 import { useNavigate } from "react-router-dom";
-import TaskDeleteModal from "./TaskDeleteModal";
 import ViewTaskModal from "./ViewTaskModal";
+import { useDispatch } from "react-redux";
+import { taskListAction } from "../redux/features/taskList";
+import type { ITaskList } from "../@types/task.list";
 
-const TaskCard = ({
-  title,
-  message,
-  date,
-  time,
-  onView,
-  onEdit,
-  onDelete,
-}: any) => {
+const TaskCard = ({ title, description, date, time, id }: ITaskList) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const [state, setState] = useState({
-    selectedTask: {},
-    isOpen: false,
-  });
-  const task = {
-    title: "Complete React Project",
-    message:
-      "Build a Todo application using React, Tailwind CSS, and Formik. Build a Todo application using React, Tailwind CSS, and Formik. Build a Todo application using React, Tailwind CSS, and Formik.Build a Todo application using React, Tailwind CSS, and Formik. Build a Todo application using React, Tailwind CSS, and Formik. Build a Todo application using React, Tailwind CSS, and Formik. Build a Todo application using React, Tailwind CSS, and Formik. Build a Todo application using React, Tailwind CSS, and Formik. Build a Todo application using React, Tailwind CSS, and Formik. Build a Todo application using React, Tailwind CSS, and Formik.Build a Todo application using React, Tailwind CSS, and Formik. Build a Todo application using React, Tailwind CSS, and Formik. Build a Todo application using React, Tailwind CSS, and Formik. Build a Todo application using React, Tailwind CSS, and Formik.",
-    date: "22 Jul 2026",
-    time: "10:30 AM",
+  const onDelete = () => {
+    dispatch(
+      taskListAction.setDeleteModal({
+        _id: id,
+        isOpen: true,
+        title: title,
+      }),
+    );
   };
 
-  const onCloseHandler = () => {
-    setState({
-      ...state,
-      isOpen: !state.isOpen,
-      selectedTask: task,
-    });
-  };
+  // console.log("testtest");
+  
 
   return (
     <>
-      <TaskDeleteModal />
-      <ViewTaskModal
+      {/* <ViewTaskModal
         isOpen={state.isOpen}
         task={state?.selectedTask}
         onClose={onCloseHandler}
-      />
+      /> */}
 
-      <div className="max-w-md w-full bg-white rounded-2xl shadow-lg border border-gray-200 p-6 hover:shadow-xl transition duration-300">
+      <div
+        className="max-w-md w-full bg-white rounded-2xl shadow-lg border border-gray-200 p-6 hover:shadow-xl transition duration-300"
+        key={id}
+      >
         {/* Title */}
         <h2 className="text-xl font-bold text-gray-800 mb-3">{title}</h2>
 
         {/* Message */}
         <div className="flex items-start gap-2 mb-4">
           <FileText className="w-5 h-5 text-blue-500 mt-1" />
-          <p className="text-gray-600 text-sm leading-relaxed">{message}</p>
+          <p className="text-gray-600 text-sm leading-relaxed">{description}</p>
         </div>
 
         {/* Date & Time */}
@@ -78,7 +68,7 @@ const TaskCard = ({
         {/* Action Buttons */}
         <div className="flex justify-end gap-3">
           <button
-            onClick={onCloseHandler}
+            // onClick={onCloseHandler}
             className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition cursor-pointer"
           >
             <Eye size={16} />

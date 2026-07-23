@@ -5,7 +5,7 @@ export const taskData = [
       "Build a Todo application using React, Tailwind CSS, and Formik. Build a Todo application using React",
     date: "2026-07-01",
     time: "15:00",
-    id:"1"
+    _id: "1",
   },
   {
     title: "02 Complete React Project",
@@ -13,7 +13,7 @@ export const taskData = [
       "Build a Todo application using React, Tailwind CSS, and Formik. Build a Todo application using React",
     date: "2026-08-12",
     time: "20:20",
-     id:"2"
+    _id: "2",
   },
   {
     title: "03 Complete React Project",
@@ -21,7 +21,6 @@ export const taskData = [
       "Build a Todo application using React, Tailwind CSS, and Formik. Build a Todo application using React",
     date: "2027-01-01",
     time: "23:20",
-     id:"3"
+    _id: "3",
   },
-  
 ];

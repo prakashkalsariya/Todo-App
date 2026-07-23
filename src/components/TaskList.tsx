@@ -4,6 +4,7 @@ import Header from "./Header";
 import Loading from "./Loading";
 import TaskCard from "./TaskCard";
 import { taskData } from "../jsonData/TaskData.ts";
+import TaskDeleteModal from "./TaskDeleteModal.tsx";
 
 const TaskList = () => {
   const [state, setState] = useState({
@@ -29,6 +30,7 @@ const TaskList = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       <Header />
+      <TaskDeleteModal />
 
       {state?.isLoading ? (
         <Loading />
@@ -37,17 +39,14 @@ const TaskList = () => {
           {taskData.map((task) => (
             <TaskCard
               title={task?.title}
-              message={task?.description}
+              description={task?.description}
               date={formatDate(task?.date)}
               time={formatTime(task?.time)}
-              onView={() => alert("View Task")}
-              onEdit={() => alert("Edit Task")}
-              onDelete={() => alert("Delete Task")}
+              id={task?._id}
             />
           ))}
         </main>
       )}
-
     </div>
   );
 };
