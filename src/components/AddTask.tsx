@@ -32,6 +32,8 @@ const AddTask = () => {
     },
   });
 
+  console.log("values>>>", formik.values);
+
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Header */}

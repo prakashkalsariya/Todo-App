@@ -4,16 +4,17 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Logo from "./Logo";
+import { taskData } from "../jsonData/taskData";
 
 const EditTask = () => {
   const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
-      title: "",
-      message: "",
-      date: "",
-      time: "",
+      title: taskData[0]?.title,
+      message: taskData[0]?.description,
+      date: taskData[0]?.date,
+      time: taskData[0]?.time,
     },
 
     validationSchema: Yup.object({
@@ -31,6 +32,7 @@ const EditTask = () => {
       navigate("/");
     },
   });
+  
 
   return (
     <div className="min-h-screen bg-gray-100">

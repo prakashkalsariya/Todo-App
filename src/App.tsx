@@ -8,17 +8,20 @@ import TaskList from "./components/TaskList";
 import AddTask from "./components/AddTask";
 import { clientRoutes } from "./utils/routes.ts";
 import EditTask from "./components/EditTask.tsx";
+import Register from "./components/Register.tsx";
+import Login from "./components/Login.tsx";
 
 function App() {
   // const [count, setCount] = useState(0)
 
   return (
     <>
-    
       <Routes>
         <Route path={clientRoutes.taskList} element={<TaskList />} />
         <Route path={clientRoutes.addTask} element={<AddTask />} />
-          <Route path={clientRoutes.editTask} element={<EditTask />} />
+        <Route path={clientRoutes.editTask} element={<EditTask />} />
+        <Route path={clientRoutes.register} element={<Register />} />
+        <Route path={clientRoutes.login} element={<Login />} />
       </Routes>
     </>
   );
