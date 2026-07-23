@@ -5,6 +5,7 @@ import Loading from "./Loading";
 import TaskCard from "./TaskCard";
 import { taskData } from "../jsonData/TaskData.ts";
 import TaskDeleteModal from "./TaskDeleteModal.tsx";
+import ViewTaskModal from "./ViewTaskModal.tsx";
 
 const TaskList = () => {
   const [state, setState] = useState({
@@ -31,6 +32,7 @@ const TaskList = () => {
     <div className="min-h-screen bg-gray-100">
       <Header />
       <TaskDeleteModal />
+      <ViewTaskModal/>
 
       {state?.isLoading ? (
         <Loading />

@@ -18,27 +18,33 @@ const TaskCard = ({ title, description, date, time, id }: ITaskList) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const onView = () => {
+    dispatch(
+      taskListAction.setViewModal({
+        isOpen: true,
+        title,
+        description,
+        date,
+        time,
+        _id: id,
+      }),
+    );
+  };
+
   const onDelete = () => {
     dispatch(
       taskListAction.setDeleteModal({
         _id: id,
         isOpen: true,
-        title: title,
+        title,
       }),
     );
   };
 
   // console.log("testtest");
-  
 
   return (
     <>
-      {/* <ViewTaskModal
-        isOpen={state.isOpen}
-        task={state?.selectedTask}
-        onClose={onCloseHandler}
-      /> */}
-
       <div
         className="max-w-md w-full bg-white rounded-2xl shadow-lg border border-gray-200 p-6 hover:shadow-xl transition duration-300"
         key={id}
@@ -68,7 +74,7 @@ const TaskCard = ({ title, description, date, time, id }: ITaskList) => {
         {/* Action Buttons */}
         <div className="flex justify-end gap-3">
           <button
-            // onClick={onCloseHandler}
+            onClick={onView}
             className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition cursor-pointer"
           >
             <Eye size={16} />
