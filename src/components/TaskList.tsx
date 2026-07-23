@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { taskData } from "../jsonData/taskData";
+
 import Header from "./Header";
 import Loading from "./Loading";
 import TaskCard from "./TaskCard";
+import { taskData } from "../jsonData/TaskData.ts";
 
 const TaskList = () => {
   const [state, setState] = useState({
@@ -46,6 +47,7 @@ const TaskList = () => {
           ))}
         </main>
       )}
+
     </div>
   );
 };
