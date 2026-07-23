@@ -1,13 +1,17 @@
-import React from "react";
-import { ArrowLeft, Pencil, Save } from "lucide-react";
+import  { useState } from "react";
+import {  LoaderCircle, Pencil } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Logo from "./Logo";
-import { taskData } from "../jsonData/taskData";
+import { taskData } from "../jsonData/TaskData";
+
 
 const EditTask = () => {
   const navigate = useNavigate();
+  const [state, setState] = useState({
+    isLoading: false,
+  });
 
   const formik = useFormik({
     initialValues: {
@@ -29,9 +33,10 @@ const EditTask = () => {
 
     onSubmit: (values) => {
       console.log(values);
-      navigate("/");
+      // navigate("/");
     },
   });
+
   
 
   return (
@@ -159,10 +164,17 @@ const EditTask = () => {
 
             <button
               type="submit"
-              className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition cursor-pointer"
+              className="w-[120px] flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition cursor-pointer"
+              // onClick={onclickedit}
             >
-               <Pencil size={18} />
-              Edit Task
+              {state?.isLoading ? (
+               <LoaderCircle className="h-7 w-7 animate-spin" />
+              ) : (
+                <>
+                  <Pencil size={18} />
+                  Edit Task
+                </>
+              )}
             </button>
           </div>
         </form>

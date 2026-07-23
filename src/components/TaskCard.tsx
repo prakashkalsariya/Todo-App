@@ -82,7 +82,7 @@ const TaskCard = ({ title, description, date, time, id }: ITaskList) => {
           </button>
 
           <button
-            onClick={() => navigate(clientRoutes.editTask)}
+            onClick={() => navigate(`${clientRoutes.editTask}/${id}`)}
             className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 transition cursor-pointer"
           >
             <Pencil size={16} />

@@ -19,7 +19,7 @@ function App() {
       <Routes>
         <Route path={clientRoutes.taskList} element={<TaskList />} />
         <Route path={clientRoutes.addTask} element={<AddTask />} />
-        <Route path={clientRoutes.editTask} element={<EditTask />} />
+        <Route path={`${clientRoutes.editTask}/:id`} element={<EditTask />} />
         <Route path={clientRoutes.register} element={<Register />} />
         <Route path={clientRoutes.login} element={<Login />} />
       </Routes>
