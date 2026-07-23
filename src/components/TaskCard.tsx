@@ -46,7 +46,6 @@ const TaskCard = ({
   return (
     <>
       <TaskDeleteModal />
-
       <ViewTaskModal
         isOpen={state.isOpen}
         task={state?.selectedTask}
