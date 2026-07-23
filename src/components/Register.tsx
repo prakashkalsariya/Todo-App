@@ -1,10 +1,17 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { User, Mail, Lock, UserPlus } from "lucide-react";
-import { Link } from "react-router-dom";
+import { User, Mail, Lock, UserPlus, LoaderCircle } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "./Logo";
+import { useEffect, useState } from "react";
+import { LocalStorageEnums } from "../enums/localstorage.enums";
+import { clientRoutes } from "../utils/routes";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const [state, setState] = useState({
+    isLoading: false,
+  });
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -34,6 +41,11 @@ const Register = () => {
       resetForm();
     },
   });
+
+  useEffect(() => {
+    let isLoggedIn = localStorage.getItem(LocalStorageEnums?.user?.login_data);
+    if (isLoggedIn) navigate(clientRoutes.taskList);
+  }, []);
 
   return (
     <>
@@ -161,10 +173,16 @@ const Register = () => {
             {/* Register Button */}
             <button
               type="submit"
-              className="flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 py-3 font-semibold text-white transition hover:bg-blue-700"
+              className="flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 py-3 font-semibold text-white transition hover:bg-blue-700 h-[50px]"
             >
-              <UserPlus size={20} />
-              Register
+              {state?.isLoading ? (
+                <LoaderCircle className="h-9 w-9 animate-spin" />
+              ) : (
+                <>
+                  <UserPlus size={20} />
+                  Register
+                </>
+              )}
             </button>
           </form>
 

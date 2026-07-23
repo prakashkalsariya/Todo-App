@@ -1,13 +1,18 @@
-import  { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Mail, Lock, Eye, EyeOff, LogIn } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Mail, Lock, Eye, EyeOff, LogIn, LoaderCircle } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "./Logo";
+import { clientRoutes } from "../utils/routes";
+import { LocalStorageEnums } from "../enums/localstorage.enums";
 
 const Login = () => {
-  const [showPassword, setShowPassword] = useState(false);
-
+  const [state, setState] = useState({
+    isLoading: false,
+    showPassword: false,
+  });
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -32,22 +37,36 @@ const Login = () => {
     },
   });
 
+  const onLogin = () => {
+    let loginData = {
+      email: formik?.values?.email,
+      isLogin:true
+    };
+    localStorage.setItem(
+      LocalStorageEnums?.user?.login_data,
+      JSON.stringify(loginData),
+    );
+    navigate(clientRoutes.taskList);
+  };
+
+  useEffect(() => {
+    let isLoggedIn = localStorage.getItem(LocalStorageEnums?.user?.login_data);
+    if (isLoggedIn) navigate(clientRoutes.taskList);
+  }, []);
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100 px-4">
       <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-xl">
-
         {/* Header */}
-           <div className="flex items-center justify-center  border-b mb-6 pb-6 border-gray-300 ">
-            <Logo/>
-          </div>
+        <div className="flex items-center justify-center  border-b mb-6 pb-6 border-gray-300 ">
+          <Logo />
+        </div>
         <div className="mb-8 text-center">
           {/* <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100">
             <LogIn className="text-blue-600" size={30} />
           </div> */}
 
-          <h1 className="text-3xl font-bold text-gray-800">
-            Welcome Back
-          </h1>
+          <h1 className="text-3xl font-bold text-gray-800">Welcome Back</h1>
 
           <p className="mt-2 text-gray-500">
             Login to continue managing your tasks.
@@ -56,7 +75,6 @@ const Login = () => {
 
         {/* Form */}
         <form onSubmit={formik.handleSubmit} className="space-y-5">
-
           {/* Email */}
           <div>
             <label className="mb-2 block font-medium text-gray-700">
@@ -85,9 +103,7 @@ const Login = () => {
             </div>
 
             {formik.touched.email && formik.errors.email && (
-              <p className="mt-1 text-sm text-red-500">
-                {formik.errors.email}
-              </p>
+              <p className="mt-1 text-sm text-red-500">{formik.errors.email}</p>
             )}
           </div>
 
@@ -104,7 +120,7 @@ const Login = () => {
               />
 
               <input
-                type={showPassword ? "text" : "password"}
+                type={state?.showPassword ? "text" : "password"}
                 name="password"
                 placeholder="Enter your password"
                 value={formik.values.password}
@@ -119,10 +135,12 @@ const Login = () => {
 
               <button
                 type="button"
-                onClick={() => setShowPassword(!showPassword)}
+                onClick={() =>
+                  setState({ ...state, showPassword: !state?.showPassword })
+                }
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
               >
-                {showPassword ? (
+                {!state?.showPassword ? (
                   <EyeOff size={20} />
                 ) : (
                   <Eye size={20} />
@@ -150,10 +168,17 @@ const Login = () => {
           {/* Login Button */}
           <button
             type="submit"
-            className="flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 py-3 font-semibold text-white transition hover:bg-blue-700"
+            className="flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 py-3 font-semibold text-white transition hover:bg-blue-700 h-[50px]"
+            onClick={onLogin}
           >
-            <LogIn size={20} />
-            Login
+            {state?.isLoading ? (
+              <LoaderCircle className="h-9 w-9 animate-spin" />
+            ) : (
+              <>
+                <LogIn size={20} />
+                Login
+              </>
+            )}
           </button>
         </form>
 

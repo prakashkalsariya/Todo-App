@@ -10,6 +10,7 @@ import { clientRoutes } from "./utils/routes.ts";
 import EditTask from "./components/EditTask.tsx";
 import Register from "./components/Register.tsx";
 import Login from "./components/Login.tsx";
+import ProtectedComponent from "./components/ProtectedComponent.tsx";
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -17,9 +18,39 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path={clientRoutes.taskList} element={<TaskList />} />
-        <Route path={clientRoutes.addTask} element={<AddTask />} />
-        <Route path={`${clientRoutes.editTask}/:id`} element={<EditTask />} />
+        <Route
+          path={clientRoutes.taskList}
+          element={
+            <>
+              <ProtectedComponent>
+                <TaskList />
+              </ProtectedComponent>
+            </>
+          }
+        />
+
+        <Route
+          path={clientRoutes.addTask}
+          element={
+            <>
+              <ProtectedComponent>
+                <AddTask />
+              </ProtectedComponent>
+            </>
+          }
+        />
+
+        <Route
+          path={`${clientRoutes.editTask}/:id`}
+          element={
+            <>
+              <ProtectedComponent>
+                <EditTask />
+              </ProtectedComponent>
+            </>
+          }
+        />
+
         <Route path={clientRoutes.register} element={<Register />} />
         <Route path={clientRoutes.login} element={<Login />} />
       </Routes>
