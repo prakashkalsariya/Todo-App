@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Mail, Lock, Eye, EyeOff, LogIn } from "lucide-react";
 import { Link } from "react-router-dom";
+import Logo from "./Logo";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -36,10 +37,13 @@ const Login = () => {
       <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-xl">
 
         {/* Header */}
-        <div className="mb-8 text-center">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100">
-            <LogIn className="text-blue-600" size={30} />
+           <div className="flex items-center justify-center  border-b mb-6 pb-6 border-gray-300 ">
+            <Logo/>
           </div>
+        <div className="mb-8 text-center">
+          {/* <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100">
+            <LogIn className="text-blue-600" size={30} />
+          </div> */}
 
           <h1 className="text-3xl font-bold text-gray-800">
             Welcome Back

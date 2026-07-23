@@ -40,7 +40,11 @@ const Register = () => {
       <div className="flex min-h-screen items-center justify-center bg-gray-100 px-4">
         <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-xl">
           {/* Heading */}
-          <Logo />
+
+          <div className="flex items-center justify-center  border-b mb-6 pb-6 border-gray-300 ">
+            <Logo />
+          </div>
+
           <div className="mb-8 text-center">
             {/* <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100">
               <UserPlus className="text-blue-600" size={30} />
