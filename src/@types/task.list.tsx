@@ -22,6 +22,14 @@ export interface ITaskState {
   _id: string;
 }
 
+export interface ITaskData {
+  title: string;
+  description: string;
+  date: string;
+  time: string;
+}
+
+
 export interface ITaskListState {
   isLoading: boolean;
   taskData: ITaskState[];

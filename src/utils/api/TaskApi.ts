@@ -1,5 +1,5 @@
-import toast from "react-hot-toast";
 import axiosInstance from "./Axios";
+import type { ITaskData } from "../../@types/task.list";
 
 export class TaskApi {
   static getTasks = async () => {
@@ -7,6 +7,25 @@ export class TaskApi {
       const res = await axiosInstance({
         method: "get",
         url: "/tasks",
+      });
+      return {
+        data: res.data,
+        status: res.status,
+      };
+    } catch (err: any) {
+      return {
+        data: err,
+        error: "Internal server error please try again!",
+      };
+    }
+  };
+
+  static createTask = async (data: ITaskData) => {
+    try {
+      const res = await axiosInstance({
+        method: "post",
+        url: `task/create`,
+        data,
       });
       return {
         data: res.data,

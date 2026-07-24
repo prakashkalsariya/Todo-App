@@ -1,17 +1,52 @@
-import React from "react";
-import { ArrowLeft, Save } from "lucide-react";
+import { useState } from "react";
+import { LoaderCircle, Save } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Logo from "./Logo";
+import type { ITaskData } from "../@types/task.list";
+import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { TaskApi } from "../utils/api/TaskApi";
+import { taskListAction } from "../redux/features/taskList";
 
 const AddTask = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
+  const [state, setState] = useState({
+    isLoading: false,
+  });
+
+  const onSubmitHandler = async (values: ITaskData) => {
+    setState({
+      ...state,
+      isLoading: true,
+    });
+
+    const res: any = await TaskApi.createTask({
+      title: values?.title,
+      description: values?.description,
+      date: values?.date,
+      time: values?.time,
+    });
+
+    if (res?.data?.success) {
+      toast.success("Task created successfully.");
+      dispatch(taskListAction.resetList());
+      navigate("/");
+    } else {
+      toast.error(res?.error || "Internal server error!");
+    }
+    setState({
+      ...state,
+      isLoading: false,
+    });
+  };
   const formik = useFormik({
     initialValues: {
       title: "",
-      message: "",
+      description: "",
       date: "",
       time: "",
     },
@@ -19,20 +54,14 @@ const AddTask = () => {
     validationSchema: Yup.object({
       title: Yup.string().required("Task title is required"),
       // .min(3, "Minimum 3 characters")
-      message: Yup.string().required("Task description is required"),
+      description: Yup.string().required("Task description is required"),
       // .min(10, "Minimum 10 characters")
       date: Yup.string().required("Task date is required"),
-
       time: Yup.string().required("Task time is required"),
     }),
 
-    onSubmit: (values) => {
-      console.log(values);
-      navigate("/");
-    },
+    onSubmit: onSubmitHandler,
   });
-
-  console.log("values>>>", formik.values);
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -79,21 +108,21 @@ const AddTask = () => {
 
             <textarea
               // rows="4"
-              name="message"
+              name="description"
               placeholder="Enter task description"
-              value={formik.values.message}
+              value={formik.values.description}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               className={`w-full border rounded-lg px-4 py-3 outline-none resize-none ${
-                formik.touched.message && formik.errors.message
+                formik.touched.description && formik.errors.description
                   ? "border-red-500"
                   : "border-gray-300 hover:border-blue-500"
               }`}
             />
 
-            {formik.touched.message && formik.errors.message && (
+            {formik.touched.description && formik.errors.description && (
               <p className="text-red-500 text-sm mt-1">
-                {formik.errors.message}
+                {formik.errors.description}
               </p>
             )}
           </div>
@@ -159,10 +188,16 @@ const AddTask = () => {
 
             <button
               type="submit"
-              className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition cursor-pointer"
+              className="w-[120px] flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition cursor-pointer"
             >
-              <Save size={18} />
-              Save Task
+              {state?.isLoading ? (
+                <LoaderCircle className="h-7 w-7 animate-spin" />
+              ) : (
+                <>
+                  <Save size={18} />
+                  Save Task
+                </>
+              )}
             </button>
           </div>
         </form>
