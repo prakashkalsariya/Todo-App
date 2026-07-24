@@ -6,6 +6,8 @@ export interface IDeleteUser {
   };
 }
 
+
+
 export interface IViewUser {
   payload: {
     isOpen: boolean;
