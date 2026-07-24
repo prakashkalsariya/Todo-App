@@ -16,6 +16,7 @@ const initialState = {
     title: "",
     _id: "",
   },
+  listReset: false,
 };
 
 export const taskListSlice = createSlice({
@@ -34,12 +35,16 @@ export const taskListSlice = createSlice({
     },
 
     setDeleteModal: (state, action: IDeleteUser) => {
-      debugger
+      debugger;
       state.deleteModal = {
         isOpen: action?.payload?.isOpen,
         title: action?.payload?.title,
         _id: action?.payload?._id,
       };
+    },
+
+    resetList: (state) => {
+      state.listReset = !state.listReset;
     },
   },
 });

@@ -15,7 +15,25 @@ export class TaskApi {
     } catch (err: any) {
       return {
         data: err,
-        error: "Something went wrong data!",
+        error: "Internal server error please try again!",
+      };
+    }
+  };
+
+  static deleteTask = async (_id: string) => {
+    try {
+      const res = await axiosInstance({
+        method: "delete",
+        url: `task/delete/${_id}`,
+      });
+      return {
+        data: res.data,
+        status: res.status,
+      };
+    } catch (err: any) {
+      return {
+        data: err,
+        error: "Internal server error please try again!",
       };
     }
   };

@@ -3,6 +3,8 @@ import { LoaderCircle, TriangleAlert } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../redux/store";
 import { taskListAction } from "../redux/features/taskList";
+import { TaskApi } from "../utils/api/TaskApi";
+import toast from "react-hot-toast";
 
 const TaskDeleteModal = () => {
   const [state, setState] = useState({
@@ -21,6 +23,27 @@ const TaskDeleteModal = () => {
         title: "",
       }),
     );
+  };
+
+  const onDelete = async () => {
+    setState({
+      ...state,
+      isLoading: true,
+    });
+
+    const res: any = await TaskApi.deleteTask(deleteData?._id);
+
+    if (res?.data?.success) {
+      toast.success("Task deleted successfully.");
+      dispatch(taskListAction.resetList());
+    } else {
+      toast.error(res?.error);
+    }
+    setState({
+      ...state,
+      isLoading: false,
+    });
+    onClose();
   };
 
   return (
@@ -62,6 +85,7 @@ const TaskDeleteModal = () => {
               <button
                 className={`rounded-lg bg-red-600 px-5 py-2 text-white transition hover:bg-red-700 w-[100px] h-[40px] flex items-center justify-center `}
                 disabled={state.isLoading}
+                onClick={onDelete}
               >
                 {state?.isLoading ? (
                   <>

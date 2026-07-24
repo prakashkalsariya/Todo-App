@@ -9,12 +9,15 @@ import toast from "react-hot-toast";
 import { TaskApi } from "../utils/api/TaskApi.ts";
 import type { ITaskListState } from "../@types/task.list.tsx";
 import { ProcessData } from "../common/comman.data.process.ts";
+import { useSelector } from "react-redux";
+import type { RootState } from "../redux/store.ts";
 
 const TaskList = () => {
   const [state, setState] = useState<ITaskListState>({
     isLoading: false,
     taskData: [],
   });
+  const reset = useSelector((state:RootState)=>state?.taskList?.listReset)
 
   const getApi = async () => {
     setState({
@@ -41,7 +44,7 @@ const TaskList = () => {
 
   useEffect(() => {
     getApi();
-  }, []);
+  }, [reset]);
   return (
     <div className="min-h-screen bg-gray-100">
       <Header />
