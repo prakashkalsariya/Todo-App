@@ -13,3 +13,16 @@ export interface ITaskList {
   time: string;
   id: string;
 }
+
+export interface ITaskState {
+  title: string;
+  description: string;
+  date: string;
+  time: string;
+  _id: string;
+}
+
+export interface ITaskListState {
+  isLoading: boolean;
+  taskData: ITaskState[];
+}

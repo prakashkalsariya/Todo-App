@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import axiosInstance from "./Axios";
 
 export class TaskApi {
@@ -7,8 +8,6 @@ export class TaskApi {
         method: "get",
         url: "/tasks",
       });
-
-      
       return {
         data: res.data,
         status: res.status,

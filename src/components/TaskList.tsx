@@ -1,49 +1,63 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Header from "./Header";
 import Loading from "./Loading";
 import TaskCard from "./TaskCard";
-import { taskData } from "../jsonData/TaskData.ts";
 import TaskDeleteModal from "./TaskDeleteModal.tsx";
 import ViewTaskModal from "./ViewTaskModal.tsx";
+import toast from "react-hot-toast";
+import { TaskApi } from "../utils/api/TaskApi.ts";
+import type { ITaskListState } from "../@types/task.list.tsx";
+import { ProcessData } from "../common/comman.data.process.ts";
 
 const TaskList = () => {
-  const [state, setState] = useState({
+  const [state, setState] = useState<ITaskListState>({
     isLoading: false,
-    tasksData: [],
+    taskData: [],
   });
-  const formatTime = (time: string) => {
-    const [hour, minute] = time.split(":").map(Number);
-    const period = hour >= 12 ? "PM" : "AM";
-    const hour12 = hour % 12 || 12;
 
-    return `${hour12}:${String(minute).padStart(2, "0")} ${period}`;
+  const getApi = async () => {
+    setState({
+      ...state,
+      isLoading: true,
+    });
+
+    const res: any = await TaskApi.getTasks();
+
+    if (res?.data?.success) {
+      setState({
+        ...state,
+        isLoading: false,
+        taskData: res?.data?.data,
+      });
+    } else {
+      setState({
+        ...state,
+        isLoading: false,
+      });
+      toast.error(res?.error);
+    }
   };
 
-  function formatDate(date: string) {
-    const finalDate = new Date(date);
-    return finalDate.toLocaleDateString("en-GB", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    });
-  }
+  useEffect(() => {
+    getApi();
+  }, []);
   return (
     <div className="min-h-screen bg-gray-100">
       <Header />
       <TaskDeleteModal />
-      <ViewTaskModal/>
+      <ViewTaskModal />
 
       {state?.isLoading ? (
         <Loading />
       ) : (
         <main className="flex items-center flex-wrap gap-5 m-5">
-          {taskData.map((task) => (
+          {state?.taskData.map((task) => (
             <TaskCard
               title={task?.title}
               description={task?.description}
-              date={formatDate(task?.date)}
-              time={formatTime(task?.time)}
+              date={ProcessData.formatDate(task?.date)}
+              time={ProcessData.formatTime(task?.time)}
               id={task?._id}
             />
           ))}
