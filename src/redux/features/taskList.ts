@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { IDeleteUser } from "../../@types/redux.type";
+import type { IDeleteUser } from "../../@types/redux.type.ts";
 
 const initialState = {
   viewModal: {
