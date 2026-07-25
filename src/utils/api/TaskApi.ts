@@ -20,6 +20,24 @@ export class TaskApi {
     }
   };
 
+  static getTaskById = async (id: string) => {
+    try {
+      const res = await axiosInstance({
+        method: "get",
+        url: `/task/${id}`,
+      });
+      return {
+        data: res.data,
+        status: res.status,
+      };
+    } catch (err: any) {
+      return {
+        data: err,
+        error: "Internal server error please try again!",
+      };
+    }
+  };
+
   static createTask = async (data: ITaskData) => {
     try {
       const res = await axiosInstance({
@@ -57,22 +75,22 @@ export class TaskApi {
     }
   };
 
-  // static getTasks = async (data: any) => {
-  //   try {
-  //     const res = await axiosInstance({
-  //       method: "post",
-  //       url: "/tasks",
-  //       data: data,
-  //     });
-  //     return {
-  //       data: res.data,
-  //       status: res.status,
-  //     };
-  //   } catch (err: any) {
-  //     return {
-  //       data: err,
-  //       error: "Something went wrong data!",
-  //     };
-  //   }
-  // };
+  static editTask = async (data: ITaskData, id: string) => {
+    try {
+      const res = await axiosInstance({
+        method: "put",
+        url: `task/update/${id}`,
+        data,
+      });
+      return {
+        data: res.data,
+        status: res.status,
+      };
+    } catch (err: any) {
+      return {
+        data: err,
+        error: "Internal server error please try again!",
+      };
+    }
+  };
 }
