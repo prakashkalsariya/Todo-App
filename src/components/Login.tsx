@@ -6,6 +6,10 @@ import { Link, useNavigate } from "react-router-dom";
 import Logo from "./Logo";
 import { clientRoutes } from "../utils/routes";
 import { LocalStorageEnums } from "../enums/localstorage.enums";
+import type { ILoginData } from "../@types/task.list";
+import toast from "react-hot-toast";
+import { AuthApi } from "../utils/api/AuthApi";
+import { AuthHelpers } from "../utils/auth.helpers";
 
 const Login = () => {
   const [state, setState] = useState({
@@ -13,6 +17,40 @@ const Login = () => {
     showPassword: false,
   });
   const navigate = useNavigate();
+
+  const onSubmitHandler = async (values: ILoginData) => {
+    setState({
+      ...state,
+      isLoading: true,
+    });
+
+    const res: any = await AuthApi.login({
+      email: values?.email,
+      password: values?.password,
+    });
+
+    console.log("res>>>", res);
+
+    if (res?.data?.success) {
+      toast.success(res?.data?.message);
+      localStorage.setItem(
+        LocalStorageEnums?.user?.access_token,
+        res?.data?.token,
+      );
+      localStorage.setItem(
+        LocalStorageEnums?.user?.login_data,
+        JSON.stringify(res?.data.data),
+      );
+      navigate(clientRoutes.taskList);
+    } else {
+      toast.error(res?.data?.message || "Internal server error!");
+    }
+    setState({
+      ...state,
+      isLoading: false,
+    });
+  };
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -26,32 +64,19 @@ const Login = () => {
 
       password: Yup.string()
         .required("Password is required")
-        .min(6, "Password must be at least 6 characters"),
+        .min(5, "Password must be at least 5 characters"),
     }),
 
-    onSubmit: (values) => {
-      console.log(values);
-
-      // Call Login API here
-      alert("Login Successful!");
-    },
+    onSubmit: onSubmitHandler,
   });
 
-  const onLogin = () => {
-    let loginData = {
-      email: formik?.values?.email,
-      isLogin:true
-    };
-    localStorage.setItem(
-      LocalStorageEnums?.user?.login_data,
-      JSON.stringify(loginData),
-    );
-    navigate(clientRoutes.taskList);
-  };
-
   useEffect(() => {
-    let isLoggedIn = localStorage.getItem(LocalStorageEnums?.user?.login_data);
-    if (isLoggedIn) navigate(clientRoutes.taskList);
+    let isLoggedIn = AuthHelpers?.validateAccessToken();
+    if (isLoggedIn) {
+      navigate(clientRoutes.taskList);
+    } else {
+      localStorage.clear();
+    }
   }, []);
 
   return (
@@ -169,7 +194,6 @@ const Login = () => {
           <button
             type="submit"
             className="flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 py-3 font-semibold text-white transition hover:bg-blue-700 h-[50px]"
-            onClick={onLogin}
           >
             {state?.isLoading ? (
               <LoaderCircle className="h-9 w-9 animate-spin" />

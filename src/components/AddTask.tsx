@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { TaskApi } from "../utils/api/TaskApi";
 import { taskListAction } from "../redux/features/taskList";
+import ProtectedComponent from "./ProtectedComponent";
 
 const AddTask = () => {
   const navigate = useNavigate();
@@ -64,6 +65,7 @@ const AddTask = () => {
   });
 
   return (
+     <ProtectedComponent>
     <div className="min-h-screen bg-gray-100">
       {/* Header */}
       <div className="bg-white shadow border-b">
@@ -203,6 +205,7 @@ const AddTask = () => {
         </form>
       </div>
     </div>
+    </ProtectedComponent>
   );
 };
 

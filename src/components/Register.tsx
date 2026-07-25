@@ -6,7 +6,7 @@ import Logo from "./Logo";
 import { useEffect, useState } from "react";
 import { LocalStorageEnums } from "../enums/localstorage.enums";
 import { clientRoutes } from "../utils/routes";
-import type { IRegisterData, ITaskData } from "../@types/task.list";
+import type { IRegisterData } from "../@types/task.list";
 import toast from "react-hot-toast";
 import { AuthApi } from "../utils/api/AuthApi";
 
@@ -28,11 +28,8 @@ const Register = () => {
       password: values?.password,
     });
 
-    console.log("res>>>", res);
-
     if (res?.data?.success) {
       toast.success(res?.data?.message);
-
       navigate(clientRoutes.login);
     } else {
       toast.error(res?.data?.message || "Internal server error!");

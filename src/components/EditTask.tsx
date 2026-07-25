@@ -5,6 +5,7 @@ import { TaskApi } from "../utils/api/TaskApi";
 import toast from "react-hot-toast";
 import Loading from "./Loading";
 import EditTaskForm from "./EditTaskForm";
+import ProtectedComponent from "./ProtectedComponent";
 
 const EditTask = () => {
   const { id }: any = useParams();
@@ -50,22 +51,24 @@ const EditTask = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      {/* Header */}
-      <div className="bg-white shadow border-b">
-        <div className=" flex items-center justify-between px-6 py-4">
-          <Logo />
-          <h1 className="text-2xl font-bold">Add Task</h1>
-          <div className="min-w-55"></div>
+    <ProtectedComponent>
+      <div className="min-h-screen bg-gray-100">
+        {/* Header */}
+        <div className="bg-white shadow border-b">
+          <div className=" flex items-center justify-between px-6 py-4">
+            <Logo />
+            <h1 className="text-2xl font-bold">Add Task</h1>
+            <div className="min-w-55"></div>
+          </div>
         </div>
+        {/* Form */}
+        {state?.isLoading ? (
+          <Loading />
+        ) : (
+          <EditTaskForm taskData={state?.taskData} id={id} />
+        )}
       </div>
-      {/* Form */}
-      {state?.isLoading ? (
-        <Loading />
-      ) : (
-        <EditTaskForm taskData={state?.taskData} id={id} />
-      )}
-    </div>
+    </ProtectedComponent>
   );
 };
 

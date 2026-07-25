@@ -1,15 +1,9 @@
 import { PlusCircle, LogOut } from "lucide-react";
 import Logo from "./Logo";
-import { Link, useNavigate } from "react-router-dom";
-import { clientRoutes } from "../utils/routes";
+import { Link } from "react-router-dom";
+import { AuthHelpers } from "../utils/auth.helpers";
 
 const Header = () => {
-  const navigate = useNavigate();
-
-  const signOut = () => {
-    localStorage.clear();
-    navigate(clientRoutes.login);
-  };
   return (
     <header className="bg-white shadow-md border-b sticky top-0 z-50">
       <div className="px-6 py-4 flex items-center justify-between">
@@ -30,7 +24,7 @@ const Header = () => {
         {/* Logout Button */}
         <button
           className="flex items-center gap-2 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition cursor-pointer "
-          onClick={signOut}
+          onClick={AuthHelpers.logOut}
         >
           <LogOut size={18} />
           Logout

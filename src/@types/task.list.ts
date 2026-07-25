@@ -34,6 +34,11 @@ export interface IRegisterData {
   password: string;
 }
 
+export interface ILoginData {
+  email: string;
+  password: string;
+}
+
 export interface ITaskListState {
   isLoading: boolean;
   taskData: ITaskState[];

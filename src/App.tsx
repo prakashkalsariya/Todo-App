@@ -18,38 +18,9 @@ function App() {
   return (
     <>
       <Routes>
-        <Route
-          path={clientRoutes.taskList}
-          element={
-            <>
-              <ProtectedComponent>
-                <TaskList />
-              </ProtectedComponent>
-            </>
-          }
-        />
-
-        <Route
-          path={clientRoutes.addTask}
-          element={
-            <>
-              <ProtectedComponent>
-                <AddTask />
-              </ProtectedComponent>
-            </>
-          }
-        />
-
-        <Route
-          path={`${clientRoutes.editTask}/:id`}
-          element={
-            <>
-              <ProtectedComponent>
-                <EditTask />
-              </ProtectedComponent>
-            </>
-          }
-        />
+        <Route path={clientRoutes.taskList} element={<TaskList />} />
+        <Route path={clientRoutes.addTask} element={<AddTask />} />
+        <Route path={`${clientRoutes.editTask}/:id`} element={<EditTask />} />
 
         <Route path={clientRoutes.register} element={<Register />} />
         <Route path={clientRoutes.login} element={<Login />} />
