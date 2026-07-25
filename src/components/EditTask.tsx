@@ -55,7 +55,7 @@ const EditTask = () => {
       <div className="min-h-screen bg-gray-100">
         {/* Header */}
         <div className="bg-white shadow border-b">
-          <div className=" flex items-center justify-between px-6 py-4">
+          <div className=" flex items-center justify-between px-6 py-4 cursor-poniter">
             <Logo />
             <h1 className="text-2xl font-bold">Add Task</h1>
             <div className="min-w-55"></div>

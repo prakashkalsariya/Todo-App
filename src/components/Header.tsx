@@ -6,8 +6,9 @@ import { AuthHelpers } from "../utils/auth.helpers";
 const Header = () => {
   return (
     <header className="bg-white shadow-md border-b sticky top-0 z-50">
-      <div className="px-6 py-4 flex items-center justify-between">
+      <div className="px-6 py-4 flex items-center justify-between cursor-pointer">
         {/* Logo */}
+
         <Logo />
 
         {/* Navigation */}

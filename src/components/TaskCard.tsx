@@ -54,8 +54,13 @@ const TaskCard = ({ title, description, date, time, id }: ITaskList) => {
 
         {/* Message */}
         <div className="flex items-start gap-2 mb-4">
-          <FileText className="w-5 h-5 text-blue-500 mt-1" />
-          <p className="text-gray-600 text-sm leading-relaxed">{description}</p>
+          <div>
+            <FileText className="text-blue-500 mt-1" />
+          </div>
+
+          <p className="text-gray-600 text-sm leading-relaxed overflow_text">
+            {description}
+          </p>
         </div>
 
         {/* Date & Time */}
