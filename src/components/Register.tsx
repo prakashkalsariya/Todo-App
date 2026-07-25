@@ -6,12 +6,43 @@ import Logo from "./Logo";
 import { useEffect, useState } from "react";
 import { LocalStorageEnums } from "../enums/localstorage.enums";
 import { clientRoutes } from "../utils/routes";
+import type { IRegisterData, ITaskData } from "../@types/task.list";
+import toast from "react-hot-toast";
+import { AuthApi } from "../utils/api/AuthApi";
 
 const Register = () => {
   const navigate = useNavigate();
   const [state, setState] = useState({
     isLoading: false,
   });
+
+  const onSubmitHandler = async (values: IRegisterData) => {
+    setState({
+      ...state,
+      isLoading: true,
+    });
+
+    const res: any = await AuthApi.register({
+      name: values?.name,
+      email: values?.email,
+      password: values?.password,
+    });
+
+    console.log("res>>>", res);
+
+    if (res?.data?.success) {
+      toast.success(res?.data?.message);
+
+      navigate(clientRoutes.login);
+    } else {
+      toast.error(res?.data?.message || "Internal server error!");
+    }
+    setState({
+      ...state,
+      isLoading: false,
+    });
+  };
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -29,17 +60,11 @@ const Register = () => {
         .required("Email is required"),
 
       password: Yup.string()
-        .min(6, "Password must be at least 6 characters")
+        .min(5, "Password must be at least 5 characters")
         .required("Password is required"),
     }),
 
-    onSubmit: (values, { resetForm }) => {
-      console.log(values);
-
-      alert("Registration Successful!");
-
-      resetForm();
-    },
+    onSubmit: onSubmitHandler,
   });
 
   useEffect(() => {

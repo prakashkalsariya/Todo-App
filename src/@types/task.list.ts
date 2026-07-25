@@ -28,7 +28,11 @@ export interface ITaskData {
   date: string;
   time: string;
 }
-
+export interface IRegisterData {
+  name: string;
+  email: string;
+  password: string;
+}
 
 export interface ITaskListState {
   isLoading: boolean;
