@@ -2,6 +2,7 @@ import { PlusCircle, LogOut } from "lucide-react";
 import Logo from "./Logo";
 import { Link } from "react-router-dom";
 import { AuthHelpers } from "../utils/auth.helpers";
+import Sidebar from "./SideBar";
 
 const Header = () => {
   return (
