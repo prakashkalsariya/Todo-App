@@ -11,6 +11,7 @@ import EditTask from "./components/EditTask.tsx";
 import Register from "./components/Register.tsx";
 import Login from "./components/Login.tsx";
 import ProtectedComponent from "./components/ProtectedComponent.tsx";
+import NotFound from "./components/NotFound.tsx";
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -24,6 +25,7 @@ function App() {
 
         <Route path={clientRoutes.register} element={<Register />} />
         <Route path={clientRoutes.login} element={<Login />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
