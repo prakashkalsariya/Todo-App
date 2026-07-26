@@ -35,7 +35,6 @@ export const taskListSlice = createSlice({
     },
 
     setDeleteModal: (state, action: IDeleteUser) => {
-      debugger;
       state.deleteModal = {
         isOpen: action?.payload?.isOpen,
         title: action?.payload?.title,

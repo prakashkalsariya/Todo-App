@@ -12,6 +12,7 @@ import { ProcessData } from "../common/comman.data.process.ts";
 import { useSelector } from "react-redux";
 import type { RootState } from "../redux/store.ts";
 import ProtectedComponent from "./ProtectedComponent.tsx";
+import TaskNotFound from "./TaskNotFound.tsx";
 
 const TaskList = () => {
   const [state, setState] = useState<ITaskListState>({
@@ -27,6 +28,7 @@ const TaskList = () => {
     });
 
     const res: any = await TaskApi.getTasks();
+    console.log("res>>", res);
 
     if (res?.data?.success) {
       setState({
@@ -35,11 +37,19 @@ const TaskList = () => {
         taskData: res?.data?.data,
       });
     } else {
-      setState({
-        ...state,
-        isLoading: false,
-      });
-      toast.error(res?.data?.response?.data?.message || res?.data?.message);
+      if (res?.data?.message == "No tasks found") {
+        setState({
+          ...state,
+          isLoading: false,
+          taskData: [],
+        });
+      } else {
+        setState({
+          ...state,
+          isLoading: false,
+        });
+        toast.error(res?.data?.response?.data?.message || res?.data?.message);
+      }
     }
   };
 
@@ -55,7 +65,7 @@ const TaskList = () => {
 
         {state?.isLoading ? (
           <Loading />
-        ) : (
+        ) : state?.taskData?.length ? (
           <main className="flex items-center flex-wrap gap-5 m-5">
             {state?.taskData.map((task) => (
               <TaskCard
@@ -67,6 +77,8 @@ const TaskList = () => {
               />
             ))}
           </main>
+        ) : (
+          <TaskNotFound />
         )}
       </div>
     </ProtectedComponent>

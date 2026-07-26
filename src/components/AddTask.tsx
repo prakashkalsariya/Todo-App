@@ -115,7 +115,7 @@ const AddTask = () => {
               value={formik.values.description}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              className={`w-full border rounded-lg px-4 py-3 outline-none resize-none ${
+              className={`w-full h-50 border rounded-lg px-4 py-3 outline-none resize-none ${
                 formik.touched.description && formik.errors.description
                   ? "border-red-500"
                   : "border-gray-300 hover:border-blue-500"
