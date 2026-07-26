@@ -24,7 +24,7 @@ const ViewTaskModal = () => {
   return (
     <>
       {viewData?.isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4">
+        <div className="fixed inset-0 z-100 flex items-center justify-center bg-black/50 px-4">
           <div className="w-full max-w-lg rounded-2xl bg-white shadow-xl">
             {/* Header */}
             <div className="flex items-center justify-between border-b p-5">

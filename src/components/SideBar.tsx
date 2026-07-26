@@ -31,7 +31,7 @@ export default function SideBar() {
 
       {/* Logo */}
 
-      <div className="flex items-center gap-3 border-b p-5">
+      {/* <div className="flex items-center gap-3 border-b p-5">
         <div className="flex min-h-11 min-w-11 items-center justify-center rounded-xl bg-blue-600 text-white font-bold">
           <CheckCircle2 className="w-7 h-7 text-white" />
         </div>
@@ -45,7 +45,7 @@ export default function SideBar() {
             </p>
           </div>
         )}
-      </div>
+      </div> */}
 
       {/* Profile */}
       <div className="border-b p-4">

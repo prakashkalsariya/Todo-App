@@ -59,7 +59,7 @@ const TaskList = () => {
   return (
     <ProtectedComponent>
       <div className="min-h-screen bg-gray-100">
-        <Header />
+        {/* <Header /> */}
         <TaskDeleteModal />
         <ViewTaskModal />
 

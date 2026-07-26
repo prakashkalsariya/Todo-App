@@ -68,7 +68,7 @@ const AddTask = () => {
      <ProtectedComponent>
     <div className="min-h-screen bg-gray-100">
       {/* Header */}
-      <div className="bg-white shadow border-b">
+      {/* <div className="bg-white shadow border-b">
         <div className=" flex items-center justify-between px-6 py-4">
           <Logo />
 
@@ -76,7 +76,7 @@ const AddTask = () => {
 
           <div className="min-w-55"></div>
         </div>
-      </div>
+      </div> */}
 
       {/* Form */}
       <div className="max-w-2xl mx-auto mt-8 bg-white p-8 rounded-xl shadow">

@@ -50,7 +50,7 @@ const TaskDeleteModal = () => {
     <>
       {deleteData?.isOpen ? (
         <div
-          className={`fixed inset-0 z-50 flex items-center justify-center bg-black/50`}
+          className={`fixed inset-0 z-100 flex items-center justify-center bg-black/50`}
         >
           <div className="w-full max-w-md rounded-xl bg-white p-6 shadow-xl">
             {/* Icon */}
