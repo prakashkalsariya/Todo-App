@@ -44,7 +44,7 @@ const TaskCard = ({ title, description, date, time, id }: ITaskList) => {
   return (
     <>
       <div
-        className="w-[32%] min-w-[300px] bg-white rounded-2xl shadow-lg border border-gray-200 p-5 hover:shadow-xl transition duration-300"
+        className="w-[100%] lg:w-[48%] xl:w-[32%] bg-white rounded-2xl shadow-lg border border-gray-200 p-5 hover:shadow-xl transition duration-300"
         key={id}
       >
         {/* Title */}
