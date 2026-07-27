@@ -66,7 +66,7 @@ const TaskList = () => {
         {state?.isLoading ? (
           <Loading />
         ) : state?.taskData?.length ? (
-          <main className="flex items-center flex-wrap gap-5 m-5">
+          <main className="flex items-center flex-wrap gap-5 m-5  justify-between">
             {state?.taskData.map((task) => (
               <TaskCard
                 title={task?.title}

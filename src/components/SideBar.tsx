@@ -4,13 +4,11 @@ import {
   X,
   LayoutDashboard,
   CheckSquare,
-  Calendar,
-  Settings,
   LogOut,
   User,
-  CheckCircle2,
 } from "lucide-react";
 import SidebarItem from "./SidebarItem";
+import { AuthHelpers } from "../utils/auth.helpers";
 
 export default function SideBar() {
   const [isOpen, setIsOpen] = useState(true);
@@ -81,23 +79,12 @@ export default function SideBar() {
           isOpen={isOpen}
           active={false}
         />
-        <SidebarItem
-          icon={<Calendar size={20} />}
-          label="Calendar"
-          isOpen={isOpen}
-          active={false}
-        />
-        <SidebarItem
-          icon={<Settings size={20} />}
-          label="Settings"
-          isOpen={isOpen}
-          active={false}
-        />
+       
       </nav>
 
-      {/* Logout */}
-      <div className="border-t p-3">
-        <button className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-red-600 transition hover:bg-red-50">
+
+      <div className="border-t p-3" >
+        <button className="w-full flex items-center gap-2 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition cursor-pointer " onClick={AuthHelpers.logOut}>
           <LogOut size={20} />
           {isOpen && <span className="font-medium">Logout</span>}
         </button>

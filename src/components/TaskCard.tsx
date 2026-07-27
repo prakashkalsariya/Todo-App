@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   CalendarDays,
   Clock,
@@ -9,7 +8,6 @@ import {
 } from "lucide-react";
 import { clientRoutes } from "../utils/routes";
 import { useNavigate } from "react-router-dom";
-import ViewTaskModal from "./ViewTaskModal";
 import { useDispatch } from "react-redux";
 import { taskListAction } from "../redux/features/taskList";
 import type { ITaskList } from "../@types/task.list";
@@ -46,19 +44,21 @@ const TaskCard = ({ title, description, date, time, id }: ITaskList) => {
   return (
     <>
       <div
-        className="max-w-md w-full bg-white rounded-2xl shadow-lg border border-gray-200 p-6 hover:shadow-xl transition duration-300"
+        className="w-[32%] min-w-[300px] bg-white rounded-2xl shadow-lg border border-gray-200 p-5 hover:shadow-xl transition duration-300"
         key={id}
       >
         {/* Title */}
-        <h2 className="text-xl font-bold text-gray-800 mb-3">{title}</h2>
+        <h2 className="text-xl font-bold text-gray-800 mb-3 overflow_title">
+          {title}
+        </h2>
 
         {/* Message */}
         <div className="flex items-start gap-2 mb-4">
           <div>
-            <FileText className="text-blue-500 mt-1" />
+            <FileText className="text-blue-500 mt-1" size={20} />
           </div>
 
-          <p className="text-gray-600 text-sm leading-relaxed overflow_text">
+          <p className="text-gray-600 text-sm leading-relaxed mt-[2px] overflow_text">
             {description}
           </p>
         </div>
@@ -83,7 +83,7 @@ const TaskCard = ({ title, description, date, time, id }: ITaskList) => {
             className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition cursor-pointer"
           >
             <Eye size={16} />
-            View
+            {/* View */}
           </button>
 
           <button
@@ -91,7 +91,7 @@ const TaskCard = ({ title, description, date, time, id }: ITaskList) => {
             className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 transition cursor-pointer"
           >
             <Pencil size={16} />
-            Edit
+            {/* Edit */}
           </button>
 
           <button
@@ -99,7 +99,7 @@ const TaskCard = ({ title, description, date, time, id }: ITaskList) => {
             className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 transition cursor-pointer"
           >
             <Trash2 size={16} />
-            Delete
+            {/* Delete */}
           </button>
         </div>
       </div>
