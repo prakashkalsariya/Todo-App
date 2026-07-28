@@ -15,8 +15,6 @@ const SidebarItem = ({
   nav_link: string;
   id: string;
 }) => {
-  console.log("active>>",active,nav_link);
-  
   return (
     <Link
       to={nav_link}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Menu, X, CheckSquare, LogOut, User, PlusCircle } from "lucide-react";
+import { Menu, X, CheckSquare, LogOut, PlusCircle } from "lucide-react";
 import { AuthHelpers } from "../utils/auth.helpers";
 import { clientRoutes } from "../utils/routes";
 import { useLocation } from "react-router-dom";
@@ -34,7 +34,6 @@ export default function SideBar() {
       ...state,
       active: location?.pathname,
     });
-    console.log("pathname>>>", location?.pathname);
   }, [location?.pathname]);
 
   return (

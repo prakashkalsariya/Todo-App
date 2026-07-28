@@ -39,7 +39,6 @@ const TaskCard = ({ title, description, date, time, id }: ITaskList) => {
     );
   };
 
-  // console.log("testtest");
 
   return (
     <>

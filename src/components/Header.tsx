@@ -1,4 +1,4 @@
-import { PlusCircle, LogOut } from "lucide-react";
+import { PlusCircle } from "lucide-react";
 import Logo from "./Logo";
 import { Link } from "react-router-dom";
 

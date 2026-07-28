@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-
-import Header from "./Header";
 import Loading from "./Loading";
 import TaskCard from "./TaskCard";
 import TaskDeleteModal from "./TaskDeleteModal.tsx";
@@ -28,7 +26,6 @@ const TaskList = () => {
     });
 
     const res: any = await TaskApi.getTasks();
-    console.log("res>>", res);
 
     if (res?.data?.success) {
       setState({

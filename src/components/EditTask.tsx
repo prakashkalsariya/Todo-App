@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Logo from "./Logo";
 import { TaskApi } from "../utils/api/TaskApi";
 import toast from "react-hot-toast";
 import Loading from "./Loading";
