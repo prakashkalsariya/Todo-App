@@ -62,13 +62,6 @@ export default function SideBar() {
 
       {/* Navigation */}
       <nav className="flex-1 space-y-2 p-3">
-        {/* <SidebarItem
-          icon={<LayoutDashboard size={20} />}
-          label="Dashboard"
-          state?.isOpen={state?.isOpen}
-          active={true}
-        /> */}
-
         {sidebarItems.map((item) => (
           <SidebarItem
             icon={item?.icon}

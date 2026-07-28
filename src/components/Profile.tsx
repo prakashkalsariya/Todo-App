@@ -11,11 +11,12 @@ const Profile = ({ isOpen }: { isOpen: boolean }) => {
   return (
     <div className="border-b p-4">
       <div className="flex items-center gap-3">
-        <div className="flex h-12 w-12 min-h-12 min-w-12 items-center justify-center rounded-full bg-slate-200 overflow-hidden">
+        <div className="flex  min-h-12 min-w-12 items-center justify-center rounded-full bg-slate-200 overflow-hidden">
           {profileData?.profile_image ? (
             <img
               src={`http://localhost:4800/images/${profileData?.profile_image}`}
               alt=""
+              className="h-12 w-12 object-cover"
             />
           ) : (
             <User className="text-slate-700" size={22} />

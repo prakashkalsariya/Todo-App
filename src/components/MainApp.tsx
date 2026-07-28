@@ -4,6 +4,7 @@ import Header from "./Header";
 import SideBar from "./SideBar";
 import { useEffect, useState } from "react";
 import { clientRoutes } from "../utils/routes";
+import Footer from "./footer";
 
 const MainApp = () => {
   const [sideBar, setSidebar] = useState(false);
@@ -34,6 +35,7 @@ const MainApp = () => {
           className={`flex-1 overflow-auto ${sideBar && "main_screen_height"}`}
         >
           <App />
+          {sideBar && <Footer />}
         </main>
       </div>
     </>
