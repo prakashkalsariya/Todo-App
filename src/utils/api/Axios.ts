@@ -1,9 +1,10 @@
 import axios from "axios";
 import { LocalStorageEnums } from "../../enums/localstorage.enums";
 
+const endPoint = import.meta.env.VITE_API_URL_ENDPOINT;
+
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:4800/api", // For Vite
-  
+  baseURL: endPoint,
 });
 
 axiosInstance.interceptors.request.use((config) => {
