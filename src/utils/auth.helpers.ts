@@ -25,4 +25,11 @@ export class AuthHelpers {
     window?.location?.replace(clientRoutes?.login);
     return;
   };
+
+  static profileData = () => {
+    let login_data =
+      localStorage.getItem(LocalStorageEnums?.user?.login_data) ?? "";
+    let finalData = JSON.parse(login_data);
+    return finalData;
+  };
 }

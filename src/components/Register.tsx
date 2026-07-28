@@ -9,11 +9,13 @@ import { clientRoutes } from "../utils/routes";
 import type { IRegisterData } from "../@types/task.list";
 import toast from "react-hot-toast";
 import { AuthApi } from "../utils/api/AuthApi";
+import ProfileImage from "./ProfileImage";
 
 const Register = () => {
   const navigate = useNavigate();
   const [state, setState] = useState({
     isLoading: false,
+    profileImage: null,
   });
 
   const onSubmitHandler = async (values: IRegisterData) => {
@@ -22,11 +24,15 @@ const Register = () => {
       isLoading: true,
     });
 
-    const res: any = await AuthApi.register({
-      name: values?.name,
-      email: values?.email,
-      password: values?.password,
-    });
+    const formData = new FormData();
+    formData.append("name", values?.name);
+    formData.append("email", values?.email);
+    formData.append("password", values?.password);
+
+    if (state.profileImage) {
+      formData.append("profile_image", state.profileImage);
+    }
+    const res: any = await AuthApi.register(formData);
 
     if (res?.data?.success) {
       toast.success(res?.data?.message);
@@ -45,6 +51,7 @@ const Register = () => {
       name: "",
       email: "",
       password: "",
+      profileImage: "",
     },
 
     validationSchema: Yup.object({
@@ -63,6 +70,19 @@ const Register = () => {
 
     onSubmit: onSubmitHandler,
   });
+
+  const handleImageChange = (e: any) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      setState({
+        ...state,
+        isLoading: false,
+        profileImage: file,
+      });
+      formik.setFieldValue("profileImage", URL.createObjectURL(file));
+    }
+  };
 
   useEffect(() => {
     let isLoggedIn = localStorage.getItem(LocalStorageEnums?.user?.login_data);
@@ -91,6 +111,12 @@ const Register = () => {
 
           <form onSubmit={formik.handleSubmit} className="space-y-5">
             {/* Name */}
+
+            <ProfileImage
+              profileImage={formik?.values?.profileImage}
+              handleImageChange={handleImageChange}
+            />
+
             <div>
               <label className="mb-2 block font-medium text-gray-700">
                 Full Name

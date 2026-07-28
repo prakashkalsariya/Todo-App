@@ -1,13 +1,13 @@
 import axiosInstance from "./Axios";
-import type { ILoginData, IRegisterData } from "../../@types/task.list";
+import type { ILoginData } from "../../@types/task.list";
 
 export class AuthApi {
-  static register = async (data: IRegisterData) => {
+  static register = async (formData: any) => {
     try {
       const res = await axiosInstance({
         method: "post",
         url: `/register`,
-        data,
+        data: formData,
       });
       return {
         data: res.data,
@@ -20,7 +20,6 @@ export class AuthApi {
       };
     }
   };
-
 
   static login = async (data: ILoginData) => {
     try {

@@ -29,8 +29,6 @@ const Login = () => {
       password: values?.password,
     });
 
-    console.log("res>>>", res);
-
     if (res?.data?.success) {
       toast.success(res?.data?.message);
       localStorage.setItem(
@@ -41,6 +39,7 @@ const Login = () => {
         LocalStorageEnums?.user?.login_data,
         JSON.stringify(res?.data.data),
       );
+
       navigate(clientRoutes.taskList);
     } else {
       toast.error(res?.data?.message || "Internal server error!");
